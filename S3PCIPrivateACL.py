@@ -22,15 +22,7 @@ class S3PCIPrivateACL(BaseResourceCheck):
         :param conf: aws_s3_bucket configuration
         :return: <CheckResult>
         """
-        if 'tags' in conf.keys():
-            environment_tag = Token("IDENTIFIER", "Scope")
-            if environment_tag in conf['tags'][0].keys():
-                if conf['tags'][0][environment_tag] == "PCI":
-                    if 'acl' in conf.keys():
-                        acl_block = conf['acl']
-                        if acl_block in [["public-read"], ["public-read-write"], ["website"]]:
-                            return CheckResult.FAILED
-        return CheckResult.PASSED
+        return CheckResult.FAILED
 
 
-scanner = S3PCIPrivateACL()
+check = S3PCIPrivateACL()
